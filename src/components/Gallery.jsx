@@ -3,9 +3,8 @@ import {fetchData} from '../services/ApiService'
 import Image from './Image'
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 
-const Gallery = () => {
-  const [photos, setPhotos] = useState([])
-  const [loading, setLoading] = useState(true)
+const Gallery = ({photos, setPhotos, loading, setLoading}) => {
+
   const options = {
     headers: {
       Authorization: `Client-ID ${import.meta.env.VITE_API_KEY}`
@@ -23,16 +22,16 @@ const Gallery = () => {
         console.error(error)
         setLoading(false)
       })
-  }, [])
+  }, [setPhotos])
 
   return (
     <div>
       {loading ? (
         <div className="loader"></div>
-      ) : (
+      ) : ( photos.length > 0 ?
         <div className='mt-10 px-[16px] md:px-[50px] py-4'>
           <ResponsiveMasonry
-                columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
+                columnsCountBreakPoints={{350: 1, 750: 2, 1000: 3, 1500: 4}}
             >
                 <Masonry gutter='16px'>
                     {photos.map(photo => (
@@ -40,7 +39,7 @@ const Gallery = () => {
                     ))}
                 </Masonry>
             </ResponsiveMasonry>
-        </div>
+        </div> : <div className='mt-10 px-[16px] md:px-[50px] py-4 text-center'>No photos found, please search another term.</div>
       )}
     </div>
   )
