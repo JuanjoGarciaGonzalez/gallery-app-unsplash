@@ -101,13 +101,13 @@ body, html { height: 100%; }
 }
 
 .download-button {
-  width: 35px;
-  height: 35px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
   background-color: #0a0a0a;
   border: 1px solid hsla(0,0%,100%,.29);
   padding: 8px;
-  border-radius: 4px;
+  border-radius: 6px;
   background-image: url('/download-icon.svg');
   background-size: 17px 17px;
   background-repeat: no-repeat;
@@ -132,26 +132,72 @@ body, html { height: 100%; }
 
 /* LIGHTBOX */
 .lightbox {
-  display: none;
   width: 100dvw;
   height: 100dvh;
-  position: fixed;
+  max-width: 0;
+  max-height: 0;
+  position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(7px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
 
   &.active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: fixed;
+    opacity: 1;
+    max-width: 100dvw;
+    max-height: 100dvh;
+    transition: opacity 0.2s ease;
+    z-index: 999;
   }
 
-  img {
-    max-width: 90%;
-    max-height: 90%;
+  .image-container {
+    width: 60%;
+    height: 85%;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 5%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    filter: drop-shadow(0px 0px 50px rgba(255, 255, 255, 0.25));
+
+    img {
+      max-height: 90%;
+      margin: 0 auto;
+    }
+  }
+
+  .close-button {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background-color: #0a0a0a;
+    border: 1px solid hsla(0,0%,100%,.29);
+    padding: 8px;
+    border-radius: 6px;
+    background-image: url('/close-icon.svg');
+    background-size: 17px 17px;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all 0.2s ease;
+    position: fixed;
+    top: 20px;
+    right: 50px;
+    z-index: 1000;
+  
+    &:hover {
+      background-color: #525252;
+    }
+  }
+
+  .download-button {
+    width: 42px;
+    height: 42px;
+    background-size: 22px 22px;
   }
 }

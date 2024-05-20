@@ -31,7 +31,7 @@ const Gallery = ({photos, setPhotos, loading, setLoading}) => {
       ) : ( photos.length > 0 ?
         <div className='mt-10 px-[16px] md:px-[50px] py-4'>
           <ResponsiveMasonry
-                columnsCountBreakPoints={{350: 1, 750: 2, 1000: 3, 1500: 4}}
+                columnsCountBreakPoints={{750: 2, 1000: 3, 1500: 4}}
             >
                 <Masonry gutter='16px'>
                     {photos.map(photo => (
