@@ -12,7 +12,7 @@ const Gallery = ({photos, setPhotos, loading, setLoading}) => {
   }
 
   useEffect(() => {
-    fetchData('https://api.unsplash.com/photos/random?count=20', options)
+    fetchData('https://api.unsplash.com/photos/random?count=30', options)
       .then(data => {
         setPhotos(data)
         setLoading(false)

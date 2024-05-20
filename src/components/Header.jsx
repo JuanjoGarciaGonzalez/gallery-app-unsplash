@@ -26,8 +26,9 @@ const Header = ({setPhotos, setLoading}) => {
             console.error(error)
           })
 
-        fetchData('https://api.unsplash.com/topics', options)
+        fetchData('https://api.unsplash.com/topics?per_page=50', options)
           .then(data => {
+            data.sort((a, b) => a.title.localeCompare(b.title))
             setTopics(data)
             setLoading(false)
             console.log(data)
@@ -42,7 +43,7 @@ const Header = ({setPhotos, setLoading}) => {
       e.preventDefault()
       setLoading(true)
       const inputValue = searchInput.current.value
-      fetchData(`https://api.unsplash.com/search/photos?query=${inputValue}`, options)
+      fetchData(`https://api.unsplash.com/search/photos?query=${inputValue}&per_page=30`, options)
         .then(data => {
           console.log(data)
           setPhotos(data.results)
@@ -58,7 +59,7 @@ const Header = ({setPhotos, setLoading}) => {
       searchInput.current.value = ''
       setLoading(true)
       const topicId = e.target.value
-      fetchData(`https://api.unsplash.com/topics/${topicId}/photos`, options)
+      fetchData(`https://api.unsplash.com/topics/${topicId}/photos?per_page=30`, options)
         .then(data => {
           console.log(data)
           setPhotos(data)
@@ -88,6 +89,7 @@ const Header = ({setPhotos, setLoading}) => {
             <form onSubmit={handleSearch} className='w-[85%] md:w-[50%] mt-[20px] mx-auto relative'>
               <input ref={searchInput} type='text' placeholder='Search for high resolution images' className='rounded-[8px] py-[.8rem] px-[3rem] bree-serif-regular search-input relative w-full'/>
               <select onChange={handleTopic} className='topic-select rounded-3xl bg-white hover:bg-[#e5e5e5] transition-all outline-none py-1 px-3 absolute right-3 top-0 bottom-0 m-auto text-sm bree-serif-regular w-[150px] cursor-pointer h-[70%] text-[#404040]'>
+                <option value=''>Topics</option>
                 {topics.map(topic => (
                   <option key={topic.id} value={topic.id}>{topic.title}</option>
                 ))}
