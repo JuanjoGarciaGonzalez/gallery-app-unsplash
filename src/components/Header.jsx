@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { fetchData } from '../services/ApiService'
 import Logo from '../svg/Logo'
 
-const Header = ({setPhotos, setLoading}) => {
+const Header = ({setPhotos, setLoading, setTerm, term, setCurrentPage, setTopic}) => {
     const [photo, setPhoto] = useState([])
     const [topics, setTopics] = useState([])
     const [loadingHeader, setLoadingHeader] = useState(true)
@@ -43,7 +43,10 @@ const Header = ({setPhotos, setLoading}) => {
       e.preventDefault()
       setLoading(true)
       const inputValue = searchInput.current.value
-      fetchData(`https://api.unsplash.com/search/photos?query=${inputValue}&per_page=30`, options)
+      setTerm(inputValue)
+      setCurrentPage(1)
+      setTopic('')
+      fetchData(`https://api.unsplash.com/search/photos?query=${inputValue}&per_page=20`, options)
         .then(data => {
           console.log(data)
           setPhotos(data.results)
@@ -59,7 +62,8 @@ const Header = ({setPhotos, setLoading}) => {
       searchInput.current.value = ''
       setLoading(true)
       const topicId = e.target.value
-      fetchData(`https://api.unsplash.com/topics/${topicId}/photos?per_page=30`, options)
+      setTopic(topicId)
+      fetchData(`https://api.unsplash.com/topics/${topicId}/photos?per_page=20`, options)
         .then(data => {
           console.log(data)
           setPhotos(data)
@@ -75,7 +79,7 @@ const Header = ({setPhotos, setLoading}) => {
     {!loadingHeader && (<header style={{background: `linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),url(${photo?.urls.full})` }} className='header h-[50dvh] px-[16px] md:px-[50px] py-4 relative'>
       <nav className='rounded-[100px] p-[7px] bg-[rgba(0,0,0,.4)] backdrop-blur mx-auto w-[300px] flex justify-center items-center'>
         <div className='w-[50%] flex justify-center items-center backdrop-blur rounded-[100px] h-full p-[10px] cursor-pointer'>
-            <span className='text-[hsla(0,0%,100%,.79)] text-sm bree-serif-regular'>Images</span>
+            <span className='text-[hsla(0,0%,100%,1)] text-sm bree-serif-regular'>Images</span>
         </div>
 
         <div className='w-[50%] flex justify-center items-center rounded-[100px] h-full p-[10px] cursor-pointer'>
@@ -88,7 +92,7 @@ const Header = ({setPhotos, setLoading}) => {
             <p className='text-center mb-1 mt-1 text-[hsla(0,0%,100%,.79)] text-xl bree-serif-regular'>The source of images of the internet. With resources from creators around the world</p>
             <form onSubmit={handleSearch} className='w-[85%] md:w-[50%] mt-[20px] mx-auto relative'>
               <input ref={searchInput} type='text' placeholder='Search for high resolution images' className='rounded-[8px] py-[.8rem] px-[3rem] bree-serif-regular search-input relative w-full'/>
-              <select onChange={handleTopic} className='topic-select rounded-3xl bg-white hover:bg-[#e5e5e5] transition-all outline-none py-1 px-3 absolute right-3 top-0 bottom-0 m-auto text-sm bree-serif-regular w-[150px] cursor-pointer h-[70%] text-[#404040]'>
+              <select onChange={handleTopic} className='hidden md:block topic-select rounded-3xl bg-white hover:bg-[#e5e5e5] transition-all outline-none py-1 px-3 absolute right-3 top-0 bottom-0 m-auto text-sm bree-serif-regular w-[150px] cursor-pointer h-[70%] text-[#404040]'>
                 <option value=''>Topics</option>
                 {topics.map(topic => (
                   <option key={topic.id} value={topic.id}>{topic.title}</option>

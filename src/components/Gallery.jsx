@@ -3,7 +3,7 @@ import {fetchData} from '../services/ApiService'
 import Image from './Image'
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 
-const Gallery = ({photos, setPhotos, loading, setLoading}) => {
+const Gallery = ({photos, setPhotos, loading, setLoading, setTerm, term, setCurrentPage, currentPage, topic}) => {
 
   const options = {
     headers: {
@@ -12,7 +12,7 @@ const Gallery = ({photos, setPhotos, loading, setLoading}) => {
   }
 
   useEffect(() => {
-    fetchData('https://api.unsplash.com/photos/random?count=30', options)
+    fetchData('https://api.unsplash.com/photos/random?count=20&page=${currentPage}', options)
       .then(data => {
         setPhotos(data)
         setLoading(false)
@@ -22,13 +22,37 @@ const Gallery = ({photos, setPhotos, loading, setLoading}) => {
         console.error(error)
         setLoading(false)
       })
-  }, [setPhotos])
+  }, [])
+
+  const fetchMoreData = () => {
+    setLoading(true)
+    setCurrentPage(currentPage + 1)
+    let url = ''
+    if(term === '' && topic === '') {
+      url = `https://api.unsplash.com/photos/random?count=20&page=${currentPage + 1}`
+    }else if(topic !== '') {
+      url = `https://api.unsplash.com/topics/${topic}/photos?per_page=20&page=${currentPage + 1}`
+    }else {
+      url = `https://api.unsplash.com/search/photos?query=${term}&per_page=20&page=${currentPage + 1}`
+    }
+    fetchData(url, options)
+      .then(data => {
+        if(term === '') {
+          setPhotos([...photos, ...data])
+        }else {
+          setPhotos([...photos, ...data.results])
+        }
+        setLoading(false)
+      })
+      .catch(error => {
+        console.error(error)
+        setLoading(false)
+      })
+  };
 
   return (
     <div>
-      {loading ? (
-        <div className="loader"></div>
-      ) : ( photos.length > 0 ?
+      {photos.length > 0 ?
         <div className='mt-10 px-[16px] md:px-[50px] py-4'>
           <ResponsiveMasonry
                 columnsCountBreakPoints={{750: 2, 1000: 3, 1500: 4}}
@@ -39,8 +63,14 @@ const Gallery = ({photos, setPhotos, loading, setLoading}) => {
                     ))}
                 </Masonry>
             </ResponsiveMasonry>
-        </div> : <div className='mt-10 px-[16px] md:px-[50px] py-4 text-center'>No photos found, please search another term.</div>
-      )}
+        </div> : <div className='mt-10 px-[16px] md:px-[50px] py-4 text-center bree-serif-regular'>No photos found, please search another term.</div>
+      }
+      {loading && <div className="loader"></div>}
+      {photos.length > 0 && !loading &&  
+          <div className='paginate h-[100px] flex justify-center items-center'>
+            <button onClick={() => fetchMoreData()} className='text-center border-solid border-color-[#404040] border-[1px] bree-serif-regular rounded-3xl bg-white hover:bg-[#e5e5e5] transition-all outline-none py-1 px-3 w-[150px] cursor-pointer text-[#404040]'>Load More</button>
+          </div>
+      }
     </div>
   )
 }

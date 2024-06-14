@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRef } from 'react'
 
 const Image = ({photo}) => {
   const lightbox = useRef(null)
 
   const openLightbox = () => {
-    console.log(lightbox.current)
     lightbox.current.classList.toggle('active')
   }
 
@@ -33,7 +32,7 @@ const Image = ({photo}) => {
             </div>
           </div>
 
-          <div className='absolute right-[50px] top-[10%] flex flex-col justify-start items-end gap-2 min-w-[15%] min-h-[50%]'>
+          <div className='absolute left-2 md:right-[50px] top-2 md:top-[10%] flex flex-row md:flex-col justify-start items-center md:items-end gap-2 md:min-w-[15%] md:min-h-[50%]'>
             <a className='p-3 flex justify-center items-center gap-3' href={photo.user.links.html} target='_blank'>
               <img src={photo.user.profile_image.small} alt={photo.alt_description} className='w-[42px] h-[42px] rounded-[50%] inline-block'/>
             </a>
