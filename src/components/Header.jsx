@@ -77,13 +77,9 @@ const Header = ({setPhotos, setLoading, setTerm, term, setCurrentPage, setTopic}
   return (
     <>
     {!loadingHeader && (<header style={{background: `linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),url(${photo?.urls.full})` }} className='header h-[50dvh] px-[16px] md:px-[50px] py-4 relative'>
-      <nav className='rounded-[100px] p-[7px] bg-[rgba(0,0,0,.4)] backdrop-blur mx-auto w-[300px] flex justify-center items-center'>
-        <div className='w-[50%] flex justify-center items-center backdrop-blur rounded-[100px] h-full p-[10px] cursor-pointer'>
+      <nav className='rounded-[100px] p-[7px] bg-[rgba(0,0,0,.4)] backdrop-blur mx-auto w-[150px] flex justify-center items-center'>
+        <div className='w-[100%] flex justify-center items-center backdrop-blur rounded-[100px] h-full p-[10px] cursor-pointer'>
             <span className='text-[hsla(0,0%,100%,1)] text-sm bree-serif-regular'>Images</span>
-        </div>
-
-        <div className='w-[50%] flex justify-center items-center rounded-[100px] h-full p-[10px] cursor-pointer'>
-            <span className='text-[hsla(0,0%,100%,.79)] text-sm bree-serif-regular'>Collections</span>
         </div>
       </nav>
 
