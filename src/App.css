@@ -64,6 +64,10 @@
 
 body, html { height: 100%; max-width: 100dvw; overflow-x: hidden; }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* LOADER */
 .loader {
   margin: 2rem auto;

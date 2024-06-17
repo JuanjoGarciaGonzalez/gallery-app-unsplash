@@ -44,7 +44,7 @@ const Image = ({photo}) => {
   return (
     <div className='relative group'>
       <img src={mainPhoto.urls.regular} alt={mainPhoto.alt_description} className='cursor-pointer' onClick={openLightbox}/>
-      <div className='px-1 absolute bottom-0 w-full h-15 flex justify-between align-middle bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.7))] opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+      <div className='px-1 absolute bottom-0 w-full h-15 flex justify-between align-middle bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.7))] opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
         <div className='p-3 flex justify-center items-center gap-3'>
           <img src={mainPhoto.user.profile_image.small} alt={mainPhoto.alt_description} className='w-10 h-10 rounded-[50%] inline-block'/>
           <span className='text-[hsla(0,0%,100%,.79)] text-sm bree-serif-regular'>{mainPhoto.user.first_name} {mainPhoto.user.last_name}</span>
@@ -67,7 +67,7 @@ const Image = ({photo}) => {
             <div className='related-photos px-[10%] pb-10'>
               <div className='separator mx-auto my-10'></div>
                 {loading ? <div className="loader"></div> : <ResponsiveMasonry
-                    columnsCountBreakPoints={{750: 2, 1000: 3, 1500: 4}}
+                    columnsCountBreakPoints={{750: 1, 1000: 3, 1500: 4}}
                 >
                     <Masonry gutter='16px'>
                     {relatedPhotos?.map(photo => (
