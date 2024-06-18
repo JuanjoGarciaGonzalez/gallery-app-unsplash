@@ -4,6 +4,8 @@ import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 
 const Image = ({photo}) => {
   const lightbox = useRef(null)
+  const lightboxBg = useRef(null)
+  const infoLightbox = useRef(null)
   const [relatedPhotos, setRelatedPhotos] = useState([])
   const [loading, setLoading] = useState(false)
   const [mainPhoto, setMainPhoto] = useState(photo)
@@ -19,6 +21,15 @@ const Image = ({photo}) => {
   const changeLightbox = (photo) => {
     setMainPhoto(photo)
     fetchRelatedPhotos()
+  }
+
+  const handleBackgroundClick = (e) => {
+    if (e.target === lightboxBg.current || e.target === infoLightbox.current) {
+      console.log('clicked')
+      openLightbox()
+    }else {
+      console.log('not clicked')
+    }
   }
 
   const fetchRelatedPhotos = () => {
@@ -58,7 +69,7 @@ const Image = ({photo}) => {
       <div className='lightbox' ref={lightbox}>
         <div className='relative h-full w-full'>
           <button onClick={openLightbox} className='close-button'></button>
-          <div className='image-container'>
+          <div className='image-container' onClick={handleBackgroundClick} ref={lightboxBg}>
             <img src={mainPhoto.urls.regular} alt={mainPhoto.alt_description} className='image'/>
             <div className='py-[20px] px-[10%] '>
               <p className='text-[hsla(0,0%,100%,.79)] text-lg bree-serif-regular text-center'>{mainPhoto.description}</p>
@@ -90,7 +101,7 @@ const Image = ({photo}) => {
             </div>
           </div>
 
-          <div className='absolute left-2 md:right-[50px] top-2 md:top-[10%] flex flex-row md:flex-col justify-start items-center md:items-end gap-2 md:min-w-[15%] md:min-h-[50%]'>
+          <div className='absolute md:right-[50px] top-2 md:top-[10%] w-[10%] inline-flex flex-row md:flex-col justify-start items-center md:items-end gap-2 md:min-w-[15%] md:min-h-[50%]' onClick={handleBackgroundClick} ref={infoLightbox}>
             <a className='p-3 flex justify-center items-center gap-3' href={mainPhoto.user.links.html} target='_blank'>
               <img src={mainPhoto.user.profile_image.small} alt={mainPhoto.alt_description} className='w-[42px] h-[42px] rounded-[50%] inline-block'/>
             </a>

@@ -37,7 +37,7 @@ const Gallery = ({photos, setPhotos, loading, setLoading, setTerm, term, setCurr
     }
     fetchData(url, options)
       .then(data => {
-        if(term === '') {
+        if(term === '' || topic !== '') {
           setPhotos([...photos, ...data])
         }else {
           setPhotos([...photos, ...data.results])
