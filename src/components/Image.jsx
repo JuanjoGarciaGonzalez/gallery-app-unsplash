@@ -40,7 +40,6 @@ const Image = ({photo}) => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data)
         setRelatedPhotos(data.results)
         setLoading(false)
       })
@@ -83,7 +82,7 @@ const Image = ({photo}) => {
       <img src={mainPhoto.urls.regular} alt={mainPhoto.alt_description} className='cursor-pointer' onClick={openLightbox}/>
       <div className='px-1 absolute bottom-0 w-full h-15 flex justify-between align-middle bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.7))] opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
         <div className='p-3 flex justify-center items-center gap-3'>
-          <img src={mainPhoto.user.profile_image.small} alt={mainPhoto.alt_description} className='w-10 h-10 rounded-[50%] inline-block'/>
+          <img src={mainPhoto.user.profile_image.small} alt={mainPhoto.alt_description} className='w-10 h-10 rounded-[50%] inline-block' loading='lazy'/>
           <span className='text-[hsla(0,0%,100%,.79)] text-sm bree-serif-regular'>{mainPhoto.user.first_name} {mainPhoto.user.last_name}</span>
         </div>
 
@@ -98,7 +97,7 @@ const Image = ({photo}) => {
         <div className='relative h-full w-full'>
           <button onClick={openLightbox} className='close-button'></button>
           <div className='image-container' onClick={handleBackgroundClick} ref={lightboxBg}>
-            <img src={mainPhoto.urls.regular} alt={mainPhoto.alt_description} className='image'/>
+            <img src={mainPhoto.urls.regular} alt={mainPhoto.alt_description} className='image' loading='lazy'/>
             <div className='py-[20px] px-[10%] '>
               <p className='text-[hsla(0,0%,100%,.79)] text-lg bree-serif-regular text-center'>{mainPhoto.description}</p>
             </div>
@@ -110,9 +109,9 @@ const Image = ({photo}) => {
                 >
                     <Masonry gutter='16px'>
                     {relatedPhotos?.map(photo => (
-                      <div className='relative group' key={photo.id} onClick={() => changeLightbox(photo)}>
-                        <img src={photo.urls.small} alt={photo.alt_description} className='w-100 h-100 rounded-[8px] cursor-pointer'/>
-                        <div className='px-1 absolute bottom-0 w-full h-15 flex justify-between align-middle bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.7))] opacity-100 transition-opacity duration-300'>
+                      <div className='relative related-photo' key={photo.id} onClick={() => changeLightbox(photo)}>
+                        <img src={photo.urls.small} alt={photo.alt_description} className='w-100 h-100 rounded-[8px] cursor-pointer' loading='lazy'/>
+                        <div className='related-info px-1 absolute bottom-0 w-full h-15 flex justify-between align-middle bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.7))] opacity-0 transition-opacity duration-300'>
                           <div className='p-3 flex justify-center items-center gap-3'>
                             <img src={photo.user.profile_image.small} alt={photo.alt_description} className='w-10 h-10 rounded-[50%] inline-block'/>
                             <span className='text-[hsla(0,0%,100%,.79)] text-sm bree-serif-regular'>{photo.user.first_name} {photo.user.last_name}</span>

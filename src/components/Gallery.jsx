@@ -16,7 +16,6 @@ const Gallery = ({photos, setPhotos, loading, setLoading, setTerm, term, setCurr
       .then(data => {
         setPhotos(data)
         setLoading(false)
-        console.log(data)
       })
       .catch(error => {
         console.error(error)

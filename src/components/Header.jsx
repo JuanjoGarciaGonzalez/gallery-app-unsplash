@@ -19,7 +19,6 @@ const Header = ({setPhotos, setLoading, setTerm, term, setCurrentPage, setTopic}
           .then(data => {
             setPhoto(data)
             setLoadingHeader(false)
-            console.log(data)
           })
           .catch(error => {
             setLoadingHeader(false)
@@ -31,7 +30,6 @@ const Header = ({setPhotos, setLoading, setTerm, term, setCurrentPage, setTopic}
             data.sort((a, b) => a.title.localeCompare(b.title))
             setTopics(data)
             setLoading(false)
-            console.log(data)
           })
           .catch(error => {
             console.error(error)
@@ -48,7 +46,6 @@ const Header = ({setPhotos, setLoading, setTerm, term, setCurrentPage, setTopic}
       setTopic('')
       fetchData(`https://api.unsplash.com/search/photos?query=${inputValue}&per_page=20`, options)
         .then(data => {
-          console.log(data)
           setPhotos(data.results)
           setLoading(false)
         })
@@ -65,7 +62,6 @@ const Header = ({setPhotos, setLoading, setTerm, term, setCurrentPage, setTopic}
       setTopic(topicId)
       fetchData(`https://api.unsplash.com/topics/${topicId}/photos?per_page=20`, options)
         .then(data => {
-          console.log(data)
           setPhotos(data)
           setLoading(false)
         })
