@@ -9,6 +9,7 @@ const Image = ({photo}) => {
   const [relatedPhotos, setRelatedPhotos] = useState([])
   const [loading, setLoading] = useState(false)
   const [mainPhoto, setMainPhoto] = useState(photo)
+  const [downloading, setDownloading] = useState(false)
 
   const openLightbox = () => {
     lightbox.current.classList.toggle('active')
@@ -25,10 +26,7 @@ const Image = ({photo}) => {
 
   const handleBackgroundClick = (e) => {
     if (e.target === lightboxBg.current || e.target === infoLightbox.current) {
-      console.log('clicked')
       openLightbox()
-    }else {
-      console.log('not clicked')
     }
   }
 
@@ -52,6 +50,34 @@ const Image = ({photo}) => {
       })
   }
 
+  const handleDownload = (photo) => {
+    setDownloading(true)
+    fetch(photo.links.download_location, {
+      headers: {
+        Authorization: `Client-ID ${import.meta.env.VITE_API_KEY}`
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        //download photo
+        fetch(data.url)
+          .then(response => response.blob())
+          .then(blob => {
+            const url = window.URL.createObjectURL(blob)
+            const a = document.createElement('a')
+            a.href = url
+            a.download = photo.alt_description
+            a.click()
+            window.URL.revokeObjectURL(url)
+            setDownloading(false)
+          })
+      }
+      )
+      .catch(error => {
+        console.error(error)
+      })
+  }
+
   return (
     <div className='relative group'>
       <img src={mainPhoto.urls.regular} alt={mainPhoto.alt_description} className='cursor-pointer' onClick={openLightbox}/>
@@ -62,7 +88,9 @@ const Image = ({photo}) => {
         </div>
 
         <div className='px-3 flex justify-center items-center'>
-          <a href={mainPhoto.links.download} target='_blank' className='download-button'></a>
+          <button className={`download-button ${downloading && 'downloading'}`} onClick={() => handleDownload(mainPhoto)}>
+            {downloading ? <div className="loader-download"></div> : ''}
+          </button>
         </div>
       </div>
 
@@ -91,7 +119,9 @@ const Image = ({photo}) => {
                           </div>
 
                           <div className='px-3 flex justify-center items-center'>
-                            <a href={photo.links.download} target='_blank' className='download-button'></a>
+                            <button className={`download-button ${downloading && 'downloading'}`} onClick={() => handleDownload(photo)}>
+                              {downloading ? <div className="loader-download"></div> : ''}
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -107,7 +137,9 @@ const Image = ({photo}) => {
             </a>
 
             <div className='px-3'>
-              <a href={mainPhoto.links.download} download className='download-button inline-block' target='_blank'></a>
+              <button className={`download-button ${downloading && 'downloading'}`} onClick={() => handleDownload(mainPhoto)}>
+                {downloading ? <div className="loader-download"></div> : ''}
+              </button>
             </div>
 
             {mainPhoto.views && <div className='px-3 flex justify-end items-center gap-1'>

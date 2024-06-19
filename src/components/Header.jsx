@@ -76,7 +76,7 @@ const Header = ({setPhotos, setLoading, setTerm, term, setCurrentPage, setTopic}
     }
   return (
     <>
-    {!loadingHeader && (<header style={{background: `linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),url(${photo?.urls.full})` }} className='header h-[50dvh] px-[16px] md:px-[50px] py-4 relative'>
+    {!loadingHeader && (<header style={{background: `linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),url(${photo?.urls.full})` }} className='header px-[16px] md:px-[50px] py-4 relative'>
       <nav className='rounded-[100px] p-[7px] bg-[rgba(0,0,0,.4)] backdrop-blur mx-auto w-[150px] flex justify-center items-center'>
         <div className='w-[100%] flex justify-center items-center backdrop-blur rounded-[100px] h-full p-[10px] cursor-pointer'>
             <span className='text-[hsla(0,0%,100%,1)] text-sm bree-serif-regular'>Images</span>
@@ -88,7 +88,7 @@ const Header = ({setPhotos, setLoading, setTerm, term, setCurrentPage, setTopic}
             <p className='text-center mb-1 mt-1 text-[hsla(0,0%,100%,.79)] text-xl bree-serif-regular'>The source of images of the internet. With resources from creators around the world</p>
             <form onSubmit={handleSearch} className='w-[85%] md:w-[50%] mt-[20px] mx-auto relative'>
               <input ref={searchInput} type='text' placeholder='Search for high resolution images' className='rounded-[8px] py-[.8rem] px-[3rem] bree-serif-regular search-input relative w-full'/>
-              <select onChange={handleTopic} className='hidden md:block topic-select rounded-3xl bg-white hover:bg-[#e5e5e5] transition-all outline-none py-1 px-3 absolute right-3 top-0 bottom-0 m-auto text-sm bree-serif-regular w-[150px] cursor-pointer h-[70%] text-[#404040]'>
+              <select onChange={handleTopic} className='hidden md:block topic-select rounded-3xl bg-white hover:bg-[#e5e5e5] transition-all outline-none py-1 px-3 absolute right-3 top-0 bottom-0 m-auto text-sm bree-serif-regular w-[150px] cursor-pointer h-[70%] text-[#404040cc]'>
                 <option value=''>Topics</option>
                 {topics.map(topic => (
                   <option key={topic.id} value={topic.id}>{topic.title}</option>

@@ -68,7 +68,7 @@ const Gallery = ({photos, setPhotos, loading, setLoading, setTerm, term, setCurr
       {loading && <div className="loader"></div>}
       {photos.length > 0 && !loading &&  
           <div className='paginate h-[100px] flex justify-center items-center'>
-            <button onClick={() => fetchMoreData()} className='text-center border-solid border-color-[#404040] border-[1px] bree-serif-regular rounded-3xl bg-white hover:bg-[#e5e5e5] transition-all outline-none py-1 px-3 w-[150px] cursor-pointer text-[#404040]'>Load More</button>
+            <button onClick={() => fetchMoreData()} className='text-center border-solid border-[1px] border-[rgb(64 64 64)] bree-serif-regular rounded-3xl bg-white hover:bg-[#e5e5e5] transition-all outline-none py-1 px-3 w-[150px] cursor-pointer text-[#404040cc]'>Load More</button>
           </div>
       }
     </div>
