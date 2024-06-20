@@ -273,3 +273,11 @@ html {
     66%  {background-position: -100%  66%,0%   66% ,100% 66% }
     100% {background-position:    0% 100%,100% 100%,200% 100%}
 }
+
+.responsive-header {
+  transition: all 0.3s ease;
+
+  &.active {
+    top: 0;
+  }
+}
