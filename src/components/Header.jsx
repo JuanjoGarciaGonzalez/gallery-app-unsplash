@@ -76,6 +76,11 @@ const Header = ({setPhotos, setLoading, setTerm, term, setCurrentPage, setTopic,
         })
     }
 
+    const handleOnChange = (e) => {
+      setInputValue(e.target.value)
+      if(e.key === 'Enter') handleSearch(e)
+    }
+
   return (
     <>
     {!loadingHeader && (
@@ -87,7 +92,7 @@ const Header = ({setPhotos, setLoading, setTerm, term, setCurrentPage, setTopic,
             </div>
             <div className='flex items-center justify-end gap-3 flex-grow'>
               <form onSubmit={handleSearch} className='w-[95%] relative'>
-                <input ref={searchInput} value={inputValue} onChange={e => setInputValue(e.target.value)} type='text' placeholder='Search for high resolution images' className='border-solid border-[1px] border-[rgb(64 64 64)] rounded-[8px] py-[.5rem] px-[3rem] bree-serif-regular search-input relative w-full'/>
+                <input ref={searchInput} value={inputValue} onChange={(e) => handleOnChange(e)} type='text' placeholder='Search for high resolution images' className='border-solid border-[1px] border-[rgb(64 64 64)] rounded-[8px] py-[.5rem] px-[3rem] bree-serif-regular search-input relative w-full'/>
                 <select value={topicValue} onChange={handleTopic} className='hidden md:block topic-select rounded-3xl bg-white hover:bg-[#e5e5e5] transition-all outline-none py-1 px-3 absolute right-3 top-0 bottom-0 m-auto text-sm bree-serif-regular w-[150px] cursor-pointer h-[70%] text-[#404040cc]'>
                   <option value=''>Topics</option>
                   {topics.map(topic => (
@@ -110,7 +115,7 @@ const Header = ({setPhotos, setLoading, setTerm, term, setCurrentPage, setTopic,
                 <div className='flex items-center justify-center gap-3'><Logo /> <span className='text-white text-2xl bree-serif-regular'>Unsplash</span></div>
                 <p className='text-center mb-1 mt-1 text-[hsla(0,0%,100%,.79)] text-xl bree-serif-regular'>The source of images of the internet. With resources from creators around the world</p>
                 <form onSubmit={handleSearch} className='w-[85%] md:w-[50%] mt-[20px] mx-auto relative'>
-                  <input ref={searchInput} value={inputValue} onChange={e => setInputValue(e.target.value)} type='text' placeholder='Search for high resolution images' className='rounded-[8px] py-[.8rem] px-[3rem] bree-serif-regular search-input relative w-full'/>
+                  <input ref={searchInput} value={inputValue} onChange={(e) => handleOnChange(e)} type='text' placeholder='Search for high resolution images' className='rounded-[8px] py-[.8rem] px-[3rem] bree-serif-regular search-input relative w-full'/>
                   <select value={topicValue} onChange={handleTopic} className='hidden md:block topic-select rounded-3xl bg-white hover:bg-[#e5e5e5] transition-all outline-none py-1 px-3 absolute right-3 top-0 bottom-0 m-auto text-sm bree-serif-regular w-[150px] cursor-pointer h-[70%] text-[#404040cc]'>
                     <option value=''>Topics</option>
                     {topics.map(topic => (
