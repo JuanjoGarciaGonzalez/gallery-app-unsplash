@@ -1,8 +1,25 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Unsplash Image Search and Download App
 
-Currently, two official plugins are available:
+![App Preview](src/assets/unsplash-gallery-app-demo.webm)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Demo
+https://unsplash-api-app.netlify.app/
+
+## Descripción
+
+Esta es una aplicación de búsqueda y descarga de imágenes de alta calidad, construida con React y utilizando la API de Unsplash. Permite a los usuarios buscar imágenes mediante palabras clave y descargar las imágenes seleccionadas.
+
+## Características
+
+- Búsqueda de imágenes mediante palabras clave.
+- Visualización de resultados con imágenes de alta calidad.
+- Descarga de imágenes seleccionadas.
+- Interfaz de usuario responsive y amigable.
+
+## Tecnologías Utilizadas
+
+- React
+- Fetch (para manejar las solicitudes HTTP)
+- Unsplash API
+- CSS y Tailwind (para el diseño y estilos)
