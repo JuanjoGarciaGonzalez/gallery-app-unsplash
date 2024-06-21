@@ -1,7 +1,7 @@
 
 # Unsplash Image Search and Download App
 
-![App Preview](src/assets/unsplash-gallery-app-demo.webm)
+![App Preview](src/assets/unsplash-app-demo.webm)
 
 ## Demo
 https://unsplash-api-app.netlify.app/
