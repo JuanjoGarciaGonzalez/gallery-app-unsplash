@@ -4,6 +4,7 @@ import Image from './Image'
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 
 const Gallery = ({photos, setPhotos, loading, setLoading, setTerm, term, setCurrentPage, currentPage, topic}) => {
+  const [empty, setEmpty] = useState(false)
 
   const options = {
     headers: {
@@ -16,6 +17,11 @@ const Gallery = ({photos, setPhotos, loading, setLoading, setTerm, term, setCurr
       .then(data => {
         setPhotos(data)
         setLoading(false)
+        if(data.length === 0) {
+          setEmpty(true)
+        }else {
+          setEmpty(false)
+        }
       })
       .catch(error => {
         console.error(error)
@@ -51,7 +57,7 @@ const Gallery = ({photos, setPhotos, loading, setLoading, setTerm, term, setCurr
 
   return (
     <div>
-      {photos.length > 0 ?
+      {photos.length > 0 &&
         <div className='mt-10 px-[16px] md:px-[50px] py-4'>
           <ResponsiveMasonry
                 columnsCountBreakPoints={{750: 1, 1000: 3, 1500: 4}}
@@ -62,9 +68,9 @@ const Gallery = ({photos, setPhotos, loading, setLoading, setTerm, term, setCurr
                     ))}
                 </Masonry>
             </ResponsiveMasonry>
-        </div> : <div className='mt-10 px-[16px] md:px-[50px] py-4 text-center bree-serif-regular'>No photos found, please search another term.</div>
-      }
+        </div>}
       {loading && <div className="loader"></div>}
+      {empty && <div className='mt-10 px-[16px] md:px-[50px] py-4 text-center bree-serif-regular'>No photos found, please search another term.</div>}
       {photos.length > 0 && !loading &&  
           <div className='paginate h-[100px] flex justify-center items-center'>
             <button onClick={() => fetchMoreData()} className='text-center border-solid border-[1px] border-[rgb(64 64 64)] bree-serif-regular rounded-3xl bg-white hover:bg-[#e5e5e5] transition-all outline-none py-1 px-3 w-[150px] cursor-pointer text-[#404040cc]'>Load More</button>
