@@ -43,6 +43,7 @@ const Header = ({setPhotos, setLoading, setTerm, term, setCurrentPage, setTopic,
 
     const handleSearch = (e) => {
       e.preventDefault()
+      searchInput.current.blur()
       setLoading(true)
       const inputValue = searchInput.current.value
       setTerm(inputValue)
