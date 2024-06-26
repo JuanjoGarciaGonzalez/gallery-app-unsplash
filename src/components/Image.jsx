@@ -106,7 +106,7 @@ const Image = ({photo}) => {
             <div className='related-photos px-[10%] pb-10'>
               <div className='separator mx-auto my-10'></div>
                 {loading ? <div className="loader"></div> : <ResponsiveMasonry
-                    columnsCountBreakPoints={{750: 1, 1000: 3, 1500: 4}}
+                    columnsCountBreakPoints={{0: 1, 500: 2, 1000: 3, 1500: 4}}
                 >
                     <Masonry gutter='16px'>
                     {relatedPhotos?.map(photo => (
@@ -133,7 +133,7 @@ const Image = ({photo}) => {
 
           <div className='absolute ml-4 md:ml-0 md:right-[50px] top-2 md:top-[10%] w-[10%] inline-flex flex-row md:flex-col justify-start items-center md:items-end gap-2 md:min-w-[15%] md:min-h-[50%]' onClick={handleBackgroundClick} ref={infoLightbox}>
             <a className='p-3 inline md:flex gap-2 flex-col items-end justify-end' href={mainPhoto.user.links.html} target='_blank'>
-              <span className='text-[hsla(0,0%,100%,.79)] text-sm bree-serif-regular hidden md:inline'>Image upload on Unsplash by @{mainPhoto.user.username}</span>
+              <span className='text-[hsla(0,0%,100%,.79)] text-sm bree-serif-regular hidden md:inline text-nowrap text-right'>Image upload on Unsplash by @{mainPhoto.user.username}</span>
               <img src={mainPhoto.user.profile_image.small} alt={mainPhoto.alt_description} className='w-[42px] h-[42px] rounded-[50%] inline-block profile-photo'/>
             </a>
 
