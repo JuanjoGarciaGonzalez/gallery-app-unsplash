@@ -21,6 +21,7 @@ const Image = ({photo}) => {
 
   const changeLightbox = (photo) => {
     setMainPhoto(photo)
+    console.log(photo)
     fetchRelatedPhotos()
   }
 
@@ -130,9 +131,10 @@ const Image = ({photo}) => {
             </div>
           </div>
 
-          <div className='absolute md:right-[50px] top-2 md:top-[10%] w-[10%] inline-flex flex-row md:flex-col justify-start items-center md:items-end gap-2 md:min-w-[15%] md:min-h-[50%]' onClick={handleBackgroundClick} ref={infoLightbox}>
-            <a className='p-3 flex justify-center items-center gap-3' href={mainPhoto.user.links.html} target='_blank'>
-              <img src={mainPhoto.user.profile_image.small} alt={mainPhoto.alt_description} className='w-[42px] h-[42px] rounded-[50%] inline-block'/>
+          <div className='absolute ml-4 md:ml-0 md:right-[50px] top-2 md:top-[10%] w-[10%] inline-flex flex-row md:flex-col justify-start items-center md:items-end gap-2 md:min-w-[15%] md:min-h-[50%]' onClick={handleBackgroundClick} ref={infoLightbox}>
+            <a className='p-3 inline md:flex gap-2 flex-col items-end justify-end' href={mainPhoto.user.links.html} target='_blank'>
+              <span className='text-[hsla(0,0%,100%,.79)] text-sm bree-serif-regular hidden md:inline'>Image upload on Unsplash by @{mainPhoto.user.username}</span>
+              <img src={mainPhoto.user.profile_image.small} alt={mainPhoto.alt_description} className='w-[42px] h-[42px] rounded-[50%] inline-block profile-photo'/>
             </a>
 
             <div className='px-3'>

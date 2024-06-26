@@ -281,4 +281,19 @@ html {
   &.active {
     top: 0;
   }
+
+  nav {
+    padding-left:50px;
+    padding-right:65px;
+
+    @media (max-width: 768px) {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+}
+
+.profile-photo {
+  border: 2px solid hsla(0,0%,100%,.29);
+  max-width: none;
 }
